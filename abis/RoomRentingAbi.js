@@ -50,37 +50,6 @@ const RRAbi = [
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_tokenId",
-        "type": "uint256"
-      },
-      {
-        "name": "_start",
-        "type": "uint256"
-      },
-      {
-        "name": "_stop",
-        "type": "uint256"
-      },
-      {
-        "name": "_accessCode",
-        "type": "bytes32"
-      }
-    ],
-    "name": "reserve",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "getNumberOfAccessCodes",
@@ -131,6 +100,10 @@ const RRAbi = [
         "type": "uint256"
       },
       {
+        "name": "roomNumber",
+        "type": "uint256"
+      },
+      {
         "name": "numBeds",
         "type": "uint16"
       }
@@ -171,6 +144,29 @@ const RRAbi = [
     ],
     "name": "transferFrom",
     "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "name": "_stop",
+        "type": "uint256"
+      }
+    ],
+    "name": "reserve",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -374,6 +370,10 @@ const RRAbi = [
         "type": "uint256"
       },
       {
+        "name": "roomNumber",
+        "type": "uint256"
+      },
+      {
         "name": "numBeds",
         "type": "uint16"
       }
@@ -399,25 +399,6 @@ const RRAbi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_numBeds",
-        "type": "uint16"
-      }
-    ],
-    "name": "addRoom",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -491,20 +472,6 @@ const RRAbi = [
     "type": "function"
   },
   {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_accessCode",
-        "type": "bytes32"
-      }
-    ],
-    "name": "addAccessCode",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "constant": true,
     "inputs": [],
     "name": "MIN_RENT_TIME",
@@ -516,6 +483,24 @@ const RRAbi = [
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "_roomNumber",
+        "type": "uint8"
+      }
+    ],
+    "name": "changeRoomNum",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -617,6 +602,20 @@ const RRAbi = [
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_accessCodes",
+        "type": "address[]"
+      }
+    ],
+    "name": "addAccessCode",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "getCLevel",
@@ -643,6 +642,29 @@ const RRAbi = [
     "inputs": [],
     "name": "unPause",
     "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_numBeds",
+        "type": "uint16"
+      },
+      {
+        "name": "_roomNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "addRoom",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
