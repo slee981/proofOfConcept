@@ -164,7 +164,7 @@ const RRAbi = [
     "outputs": [
       {
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "payable": false,
@@ -341,6 +341,33 @@ const RRAbi = [
       {
         "name": "",
         "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "name": "_stop",
+        "type": "uint256"
+      }
+    ],
+    "name": "getReservations",
+    "outputs": [
+      {
+        "name": "_renters",
+        "type": "address[]"
       }
     ],
     "payable": false,
@@ -675,6 +702,6 @@ const RRAbi = [
     "stateMutability": "nonpayable",
     "type": "constructor"
   }
-]
+];
 
 module.exports = RRAbi

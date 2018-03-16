@@ -30,7 +30,7 @@ import './RoomOwnership.sol';
     /** METHODS ***
 
     ### Temporary for EthMemphis ###
-    addAccessCode(address)................add new access code for ethMemphis aplicants
+    addAccessCode(address[])................add new access code for ethMemphis aplicants
     getNumberOfAccessCodes()..............see total outstanding access codes
 
     ### Non-Fungible ###
@@ -166,12 +166,13 @@ contract RoomRenting is RoomOwnership {
     */
 
     // @dev reserve future access to an asset
+    // for this version return the auto assigned tokenId
     function reserve(uint256 _start, uint256 _stop)
 
     external
     onlyEthMemphis()
 
-    returns (bool)
+    returns (uint256)
     {
         address _guest = msg.sender;
         uint256 _tokenId = nextAssignedBed;
@@ -183,7 +184,7 @@ contract RoomRenting is RoomOwnership {
         // check availability (for all dates in range)
         for (uint i = _start; i <= _stop; i ++) {
             if (! _isAvailable(_tokenId, i)) {
-                return false;
+                return 0;
             }
         }
 
@@ -195,7 +196,7 @@ contract RoomRenting is RoomOwnership {
         _removeAccessCode(_guest);
         _incrementBedId();
 
-        return true;
+        return _tokenId;
     }
 
     // @dev access your asset

@@ -93,6 +93,25 @@ contract RoomBase is PermissionedAccess {
         numBeds = room.numBeds;
     }
 
+    function getReservations(uint256 _tokenId, uint256 _start, uint256 _stop) external view returns (address[] _renters) {
+
+        require(_start < _stop);
+        uint256 _timeSlots = _stop - _start;
+
+        _renters = new address[](_timeSlots);
+
+        uint256 _counter = 0;
+
+        for (uint256 i=_start; i<_stop; i++) {
+            address _renter = reservations[_tokenId][i];
+
+            _renters[_counter] = _renter;
+            _counter ++;
+        }
+
+        return _renters;
+    }
+
     function changeMinRental(uint256 _tokenId, uint256 _newMin) external {
         Room storage room = rooms[_tokenId];
         require(msg.sender == room.owner);
