@@ -111,7 +111,11 @@ contract RoomBase is PermissionedAccess {
         room.roomNumber = _roomNumber;
     }
 
-    // get time
+    // get time in order to make reservation
+    // this is the minimum number of seconds that someone can rent
+    //
+    // so if minRentTime = 1 day = 3600*24 s, then the current adjusted time is
+    //       time = now/minRentTime
     function getCurrentTime(uint256 _tokenId) external view returns (uint256 _time) {
         Room storage room = rooms[_tokenId];
         uint256 minRent = room.minRentTime;

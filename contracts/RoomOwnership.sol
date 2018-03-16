@@ -21,6 +21,8 @@ contract RoomOwnership is RoomBase {
         return owner;
     }
 
+    // @dev find owner using a different implementation.
+    // this is just to test the difference in gas used
     function ownerOf_2(uint256 _tokenId) external view returns (address owner) {
         Room storage r = rooms[_tokenId];
         owner = r.owner;

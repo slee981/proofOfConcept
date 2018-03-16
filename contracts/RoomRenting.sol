@@ -78,11 +78,9 @@ contract RoomRenting is RoomOwnership {
         CONSTRUCTOR
     */
 
-    //sets the ceo of bookLocal
+    //sets the ceo of bookLocal and add the zeroth room
     function RoomRenting() public {
         ceo = msg.sender;
-
-        // add room zero
         addRoom(1, 0);
     }
 
@@ -91,7 +89,6 @@ contract RoomRenting is RoomOwnership {
     */
 
     // only let a guests with valid access code reserve the room
-
     modifier onlyEthMemphis() {
         address _guest = msg.sender;
         require(_validAccessCode(_guest));
@@ -105,7 +102,6 @@ contract RoomRenting is RoomOwnership {
     /// *** ADD ACCESS CODE *** \\\
     /// only left here for use at ETH memephis
     /// will remove for future versions
-
     function addAccessCode(address[] _accessCodes) external onlyCLevel {
 
         for (uint i=0; i<_accessCodes.length; i++) {
@@ -160,7 +156,7 @@ contract RoomRenting is RoomOwnership {
     // automate bed assignments for ethMemphis
     function _incrementBedId() internal returns (uint256) {
         uint256 totalBeds = totalSupply();
-        require(nextAssignedBed <= totalBeds);
+        require(nextAssignedBed < totalBeds);
 
         nextAssignedBed ++;
     }
@@ -170,7 +166,6 @@ contract RoomRenting is RoomOwnership {
     */
 
     // @dev reserve future access to an asset
-
     function reserve(uint256 _start, uint256 _stop)
 
     external
