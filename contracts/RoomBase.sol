@@ -50,7 +50,32 @@ contract RoomBase is PermissionedAccess {
     Define Functions
     */
 
-    function addRoom(uint16 _numBeds, uint256 _roomNumber) public onlyCLevel returns (uint256) {
+    function addRooms(uint16[] _numBeds, uint256[] _roomNumber) public onlyCLevel {
+
+        require(_numBeds.length == _roomNumber.length);
+
+        address _owner = msg.sender;
+        address _renter = address(0);
+        uint256 _min = MIN_RENT_TIME;
+
+        for (uint i=0; i<_roomNumber.length; i++) {
+            // create new Room struct and store to memory
+            Room memory _room = Room({
+                owner: _owner,
+                renter: _renter,
+                minRentTime: _min,
+                numBeds: _numBeds[i],
+                roomNumber: _roomNumber[i]
+            });
+
+            // push new room to rooms array
+            uint256 roomId = rooms.push(_room) - 1;
+
+            _transfer(0, _owner, roomId);
+        }
+    }
+
+    function addRoom(uint16 _numBeds, uint256 _roomNumber) public onlyCLevel {
 
         address _owner = msg.sender;
         address _renter = address(0);
@@ -69,8 +94,6 @@ contract RoomBase is PermissionedAccess {
         uint256 roomId = rooms.push(_room) - 1;
 
         _transfer(0, _owner, roomId);
-
-        return roomId;
     }
 
     function getNumBeds(uint256 _tokenId) external view returns (uint16 numBeds) {
