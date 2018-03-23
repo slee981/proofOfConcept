@@ -193,6 +193,9 @@ contract RoomRenting is RoomOwnership {
             reservations[_tokenId][i] = _guest;
         }
 
+        // store for searching
+        reservationsByGuest[_guest][_tokenId] = [_start, _stop];
+
         _removeAccessCode(_guest);
         _incrementBedId();
 

@@ -127,6 +127,33 @@ const RRAbi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getNextReservation",
+    "outputs": [
+      {
+        "name": "_guest",
+        "type": "address"
+      },
+      {
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "name": "_stop",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -267,6 +294,33 @@ const RRAbi = [
       {
         "name": "owner",
         "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "reservationsByGuest",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,

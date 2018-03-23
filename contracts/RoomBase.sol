@@ -46,11 +46,39 @@ contract RoomBase is PermissionedAccess {
     // @dev mapping for basic reservations
     mapping (uint256 => mapping (uint256 => address)) public reservations;
 
+    // @dev mppings for guest search
+    mapping (address => mapping (uint256 => uint256[])) public reservationsByGuest;
+
     /**
     Define Functions
     */
 
-    function addRoom(uint16 _numBeds, uint256 _roomNumber) public onlyCLevel returns (uint256) {
+    function addRooms(uint16[] _numBeds, uint256[] _roomNumber) public onlyCLevel {
+
+        require(_numBeds.length == _roomNumber.length);
+
+        address _owner = msg.sender;
+        address _renter = address(0);
+        uint256 _min = MIN_RENT_TIME;
+
+        for (uint i=0; i<_roomNumber.length; i++) {
+            // create new Room struct and store to memory
+            Room memory _room = Room({
+                owner: _owner,
+                renter: _renter,
+                minRentTime: _min,
+                numBeds: _numBeds[i],
+                roomNumber: _roomNumber[i]
+            });
+
+            // push new room to rooms array
+            uint256 roomId = rooms.push(_room) - 1;
+
+            _transfer(0, _owner, roomId);
+        }
+    }
+
+    function addRoom(uint16 _numBeds, uint256 _roomNumber) public onlyCLevel {
 
         address _owner = msg.sender;
         address _renter = address(0);
@@ -70,7 +98,6 @@ contract RoomBase is PermissionedAccess {
 
         _transfer(0, _owner, roomId);
 
-        return roomId;
     }
 
     function getNumBeds(uint256 _tokenId) external view returns (uint16 numBeds) {
@@ -91,6 +118,18 @@ contract RoomBase is PermissionedAccess {
         minRentTime = room.minRentTime;
         roomNumber = room.roomNumber;
         numBeds = room.numBeds;
+    }
+
+    function getNextReservation(uint256 _tokenId) external view returns (
+        address _guest,
+        uint256 _start,
+        uint256 _stop)
+        {
+        _guest = msg.sender;
+
+        uint256[] storage _dates = reservationsByGuest[_guest][_tokenId];
+        _start = _dates[0];
+        _stop = _dates[1];
     }
 
     function getReservations(uint256 _tokenId, uint256 _start, uint256 _stop) external view returns (address[] _renters) {
