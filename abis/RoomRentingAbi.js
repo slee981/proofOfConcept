@@ -175,6 +175,24 @@ const RRAbi = [
     "constant": false,
     "inputs": [
       {
+        "name": "_numBeds",
+        "type": "uint16[]"
+      },
+      {
+        "name": "_roomNumber",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "addRooms",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
         "name": "_newCEO",
         "type": "address"
       }
@@ -686,12 +704,7 @@ const RRAbi = [
       }
     ],
     "name": "addRoom",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
