@@ -31,6 +31,13 @@ contract RoomBase is PermissionedAccess {
     // @dev init array of Room structs, called rooms
     Room[] public rooms;
 
+    struct Reservation {
+        address guest;
+        uint256 tokenId;
+        uint256 start;
+        uint256 stop;
+    }
+
     // @dev default minimum unit of rent is one day (in seconds)
     uint256 public MIN_RENT_TIME = 3600*24;
 
@@ -47,7 +54,7 @@ contract RoomBase is PermissionedAccess {
     mapping (uint256 => mapping (uint256 => address)) public reservations;
 
     // @dev mppings for guest search
-    mapping (address => mapping (uint256 => uint256[])) public reservationsByGuest;
+    mapping (address => Reservation) public reservationByGuest;
 
     /**
     Define Functions
@@ -120,16 +127,15 @@ contract RoomBase is PermissionedAccess {
         numBeds = room.numBeds;
     }
 
-    function getNextReservation(uint256 _tokenId) external view returns (
-        address _guest,
+    function getNextReservation(address _guest) external view returns (
+        uint256 _tokenId,
         uint256 _start,
-        uint256 _stop)
-        {
-        _guest = msg.sender;
-
-        uint256[] storage _dates = reservationsByGuest[_guest][_tokenId];
-        _start = _dates[0];
-        _stop = _dates[1];
+        uint256 _stop
+        ){
+        Reservation storage _res = reservationByGuest[_guest];
+        _tokenId = _res.tokenId;
+        _start = _res.start;
+        _stop = _res.stop;
     }
 
     function getReservations(uint256 _tokenId, uint256 _start, uint256 _stop) external view returns (address[] _renters) {

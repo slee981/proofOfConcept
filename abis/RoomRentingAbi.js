@@ -1,4 +1,4 @@
-const RRAbi = [
+const RRAbi =  [
   {
     "constant": false,
     "inputs": [
@@ -56,6 +56,33 @@ const RRAbi = [
     "outputs": [
       {
         "name": "_codesLeft",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_guest",
+        "type": "address"
+      }
+    ],
+    "name": "getNextReservation",
+    "outputs": [
+      {
+        "name": "_tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "_start",
+        "type": "uint256"
+      },
+      {
+        "name": "_stop",
         "type": "uint256"
       }
     ],
@@ -127,33 +154,6 @@ const RRAbi = [
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "getNextReservation",
-    "outputs": [
-      {
-        "name": "_guest",
-        "type": "address"
-      },
-      {
-        "name": "_start",
-        "type": "uint256"
-      },
-      {
-        "name": "_stop",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "constant": false,
     "inputs": [
       {
@@ -194,6 +194,24 @@ const RRAbi = [
         "type": "uint256"
       }
     ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_numBeds",
+        "type": "uint16[]"
+      },
+      {
+        "name": "_roomNumber",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "addRooms",
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -294,33 +312,6 @@ const RRAbi = [
       {
         "name": "owner",
         "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "address"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "reservationsByGuest",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
       }
     ],
     "payable": false,
@@ -554,6 +545,37 @@ const RRAbi = [
   },
   {
     "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "reservationByGuest",
+    "outputs": [
+      {
+        "name": "guest",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "start",
+        "type": "uint256"
+      },
+      {
+        "name": "stop",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
     "inputs": [],
     "name": "MIN_RENT_TIME",
     "outputs": [
@@ -740,12 +762,7 @@ const RRAbi = [
       }
     ],
     "name": "addRoom",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
