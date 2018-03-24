@@ -104,10 +104,6 @@ contract RoomBase is PermissionedAccess {
         uint256 roomId = rooms.push(_room) - 1;
 
         _transfer(0, _owner, roomId);
-<<<<<<< HEAD
-=======
-
->>>>>>> test
     }
 
     function getNumBeds(uint256 _tokenId) external view returns (uint16 numBeds) {
